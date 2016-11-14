@@ -17,7 +17,7 @@ class plugin_kvm::tasks::kvm {
   $network_metadata          = hiera_hash('network_metadata')
   $kvm_hiera_values          = hiera_hash('fuel-plugin-kvm')
 
-  $kvm_nodes_array           = get_nodes_hash_by_roles($network_metadata, ['kvm'])
+  $kvm_nodes_array           = get_nodes_hash_by_roles($network_metadata, ['kvm-host'])
 
   notice('KVM')
 

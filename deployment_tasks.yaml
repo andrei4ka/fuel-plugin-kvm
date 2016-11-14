@@ -1,8 +1,8 @@
 # Deployment groups
-- id: kvm
+- id: kvm-host
   type: group
   version: &task_engine_version 2.0.0
-  role: [kvm]
+  role: [kvm-host]
   requires: [deploy_start]
   required_for: [deploy_end]
   tasks: &common_tasks
@@ -22,7 +22,7 @@
 - id: dummy_task
   type: puppet
   version: *task_engine_version
-  groups: [kvm]
+  groups: [kvm-host]
   requires: *common_tasks
   required_for: [deploy_end]
   reexecute_on: [deploy_changes]

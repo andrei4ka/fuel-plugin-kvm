@@ -16,7 +16,7 @@ volumes:
           generator_args: ["kvm-images"]
 
 volumes_roles_mapping:
-  kvm:
+  kvm-host:
     # Default role mapping
     - {allocate_size: "min", id: "os"}
     - {allocate_size: "all", id: "kvm-images"}
