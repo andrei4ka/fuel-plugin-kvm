@@ -1,6 +1,22 @@
 # Set here new volumes for your role
-volumes: []
+volumes:
+  - id: "kvm-images"
+    type: "vg"
+    min_size:
+      generator: "calc_gb_to_mb"
+      generator_args: [50]
+    label: "KVM Images"
+    volumes:
+      - mount: "/var/lib/libvirt/images"
+        type: "lv"
+        name: "images"
+        file_system: "ext4"
+        size:
+          generator: "calc_total_vg"
+          generator_args: ["kvm-images"]
+
 volumes_roles_mapping:
-  lcm:
+  kvm:
     # Default role mapping
     - {allocate_size: "min", id: "os"}
+    - {allocate_size: "all", id: "kvm-images"}
