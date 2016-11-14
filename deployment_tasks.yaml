@@ -1,0 +1,32 @@
+# Deployment groups
+- id: kvm
+  type: group
+  version: &task_engine_version 2.0.0
+  role: [kvm]
+  requires: [deploy_start]
+  required_for: [deploy_end]
+  tasks: &common_tasks
+    - hiera
+    - setup_repositories
+    - fuel_pkgs
+    - globals
+    - tools
+    - logging
+    - netconfig
+    - hosts
+    - firewall
+  parameters:
+    strategy:
+      type: one_by_one
+
+- id: dummy_task
+  type: puppet
+  version: *task_engine_version
+  groups: [kvm]
+  requires: *common_tasks
+  required_for: [deploy_end]
+  reexecute_on: [deploy_changes]
+  parameters:
+    puppet_manifest: puppet/manifests/kvm.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1200
