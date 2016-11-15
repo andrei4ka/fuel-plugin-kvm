@@ -19,14 +19,15 @@
     strategy:
       type: one_by_one
 
-- id: dummy_task
+- id: kvm_plugin
   type: puppet
   version: *task_engine_version
   groups: [kvm-host]
+  required_for : [deploy_end]
   requires: *common_tasks
-  required_for: [deploy_end]
   reexecute_on: [deploy_changes]
   parameters:
-    puppet_manifest: puppet/manifests/kvm.pp
-    puppet_modules: puppet/modules:/etc/puppet/modules
+    puppet_manifest: "puppet/manifests/kvm.pp"
+    puppet_modules: "puppet/modules/:/etc/puppet/modules/"
     timeout: 1200
+

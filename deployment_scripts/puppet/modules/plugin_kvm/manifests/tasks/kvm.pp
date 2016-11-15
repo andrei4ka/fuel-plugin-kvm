@@ -19,6 +19,11 @@ class plugin_kvm::tasks::kvm {
 
   $kvm_nodes_array           = get_nodes_hash_by_roles($network_metadata, ['kvm-host'])
 
-  notice('KVM')
+  class { '::libvirt':
+    defaultnetwork     => true,
+    virtinst           => false,
+    unix_sock_group    => 'wheel',
+    unix_sock_rw_perms => '0770',
+  }
 
 }

@@ -5,11 +5,11 @@ volumes:
     min_size:
       generator: "calc_gb_to_mb"
       generator_args: [50]
-    label: "KVM Images"
+    label: "kvm-images"
     volumes:
       - mount: "/var/lib/libvirt/images"
         type: "lv"
-        name: "images"
+        name: "kvm"
         file_system: "ext4"
         size:
           generator: "calc_total_vg"
@@ -20,3 +20,4 @@ volumes_roles_mapping:
     # Default role mapping
     - {allocate_size: "min", id: "os"}
     - {allocate_size: "all", id: "kvm-images"}
+    - {allocate_size: "min", id: "logs"}
