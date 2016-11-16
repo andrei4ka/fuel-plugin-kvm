@@ -14,13 +14,10 @@
 
 class plugin_kvm {
 
-  # Hiera lookups
+  # Dummy Hiera lookups
   $kvm_network_metadata     = hiera_hash('network_metadata')
   $kvm_network_scheme       = hiera_hash('network_scheme')
   $kvm_my_uid               = hiera('uid')
   $kvm_hiera_values         = hiera_hash('fuel-plugin-kvm', {})
-  $neutron_config           = hiera_hash('neutron_config')
-  $mgmt_cidr                = hiera('management_network_range')
-  $mgmt_cidr_array          = split($mgmt_cidr, '\/')
 
 }

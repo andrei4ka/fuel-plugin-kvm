@@ -12,7 +12,20 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-notice('MODULAR: fuel-plugin-kvm/kvm.pp')
+class plugin_kvm::package (
+  $install,
+  $remove = undef,
+  ) {
 
-include '::plugin_kvm'
-include '::plugin_kvm::kvm'
+  if ($install) {
+    package { $install:
+      ensure  => present,
+    }
+  }
+
+  if ($remove) {
+    package { $remove:
+      ensure  => purged,
+    }
+  }
+}

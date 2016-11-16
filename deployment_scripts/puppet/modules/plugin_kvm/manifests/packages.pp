@@ -12,7 +12,13 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-notice('MODULAR: fuel-plugin-kvm/kvm.pp')
+class plugin_kvm::packages {
 
-include '::plugin_kvm'
-include '::plugin_kvm::kvm'
+  $packages_to_install = ['virt-manager']
+  $packages_to_remove  = ['apparmor']
+
+  class { 'plugin_kvm::package':
+    install  => [$packages_to_install],
+    remove   => [$packages_to_remove],
+  }
+}

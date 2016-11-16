@@ -12,7 +12,17 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-notice('MODULAR: fuel-plugin-kvm/kvm.pp')
+class plugin_kvm::kvm {
 
-include '::plugin_kvm'
-include '::plugin_kvm::kvm'
+  $network_metadata = hiera_hash('network_metadata')
+  $kvm_hiera_values = hiera_hash('fuel-plugin-kvm')
+
+  class { '::libvirt':
+    defaultnetwork     => false,
+    virtinst           => true,
+    qemu_vnc_listen    => '0.0.0.0',
+    qemu_vnc_sasl      => true,
+    unix_sock_group    => 'adm',
+    unix_sock_rw_perms => '0770',
+  }
+}

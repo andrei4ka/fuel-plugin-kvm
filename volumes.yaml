@@ -5,7 +5,7 @@ volumes:
     min_size:
       generator: "calc_gb_to_mb"
       generator_args: [50]
-    label: "kvm-images"
+    label: "KVM Images"
     volumes:
       - mount: "/var/lib/libvirt/images"
         type: "lv"

@@ -12,7 +12,6 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-notice('MODULAR: fuel-plugin-kvm/kvm.pp')
+notice('MODULAR: fuel-plugin-kvm/packages.pp')
 
-include '::plugin_kvm'
-include '::plugin_kvm::kvm'
+include '::plugin_kvm::packages'
